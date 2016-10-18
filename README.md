@@ -16,7 +16,7 @@ For the purpose of providing 24/7 phone support of Atlassian products of externa
 
 ###3.	There should be System Administrator panel where admin can:  ###
 
-Create agent account
+* Create agent account
 * Set agent password
 * Set agent e-mail
 * Set agent phone number
