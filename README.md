@@ -6,8 +6,8 @@ For the purpose of providing 24/7 phone support of Atlassian products of externa
 
 * Web available system, allowing agents to authenticate with username/password.
 * After authentication, each agent can do the following: 
-**
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+    *
+*There should be System Administrator panel where admin can: 
 
 ### How do I get set up? ###
 
