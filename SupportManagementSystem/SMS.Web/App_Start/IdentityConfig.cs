@@ -42,7 +42,7 @@ namespace SMS.Web
         {
         }
 
-        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 
+        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
             var manager = new ApplicationUserManager(new UserStore<SupportAgent>(context.Get<SMSContext>()));
             // Configure validation logic for usernames
