@@ -9,8 +9,12 @@
 
         public DateTime EndTime { get; set; }
 
-        public SupportAgent SupportAgent { get; set; }
+        public string SupportAgentId { get; set; }
 
-        public Availability Availability { get; set; }
+        public int AvailabilityId { get; set; }
+
+        public virtual SupportAgent SupportAgent { get; set; }
+
+        public virtual Availability Availability { get; set; }
     }
 }

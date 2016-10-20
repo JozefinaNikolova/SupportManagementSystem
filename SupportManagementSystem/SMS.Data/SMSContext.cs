@@ -7,7 +7,7 @@ namespace SMS.Data
     using System.Data.Entity;
     using System.Linq;
 
-    public class SMSContext : IdentityDbContext<IdentityUser>
+    public class SMSContext : IdentityDbContext<SupportAgent>
     {
         public SMSContext()
             : base("name=SMSContext")
@@ -15,10 +15,10 @@ namespace SMS.Data
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<SMSContext, Configuration>());
         }
 
-        public virtual DbSet<Availability> Availabilities { get; set; }
-        public virtual DbSet<CallSettings> CallSettings { get; set; }
-        public virtual DbSet<Report> Reports { get; set; }
-        public virtual DbSet<SupportAgentsAvailability> SupportAgentsAvailabilities { get; set; }
+        public IDbSet<Availability> Availabilities { get; set; }
+        public IDbSet<CallSettings> CallSettings { get; set; }
+        public IDbSet<Report> Reports { get; set; }
+        public IDbSet<SupportAgentsAvailability> SupportAgentsAvailabilities { get; set; }
 
         public static SMSContext Create()
         {

@@ -8,7 +8,9 @@
 
     public class SupportAgent : IdentityUser
     {
-        public Availability Availability { get; set; }
+        public int? AvailabilityId { get; set; }
+
+        public virtual Availability Availability { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<SupportAgent> manager)
         {
