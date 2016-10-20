@@ -21,21 +21,29 @@ namespace SMS.Data.Migrations
         {
             if (!context.Users.Any())
             {
+                CreateUserRoles(context);
+
                 var adminEmail = "admin@admin.com";
                 var adminUsername = adminEmail;
                 var adminPhoneNumber = "07001700";
                 var adminPassword = "123456";
                 string adminRole = "Administrator";
+
                 CreateAdminUser(context, adminEmail, adminUsername, adminPhoneNumber, adminPassword, adminRole);
             }
 
             if(!context.Availabilities.Any())
             {
-                context.Availabilities.Add(new Availability { AvailabilityName = "Primary Support" });
-                context.Availabilities.Add(new Availability { AvailabilityName = "Secondary Support" });
-                context.Availabilities.Add(new Availability { AvailabilityName = "Generally Available" });
-                context.Availabilities.Add(new Availability { AvailabilityName = "Unavailable" });
+                AddAvailabilities(context);
             }
+        }
+
+        private void CreateUserRoles(SMSContext context)
+        {
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            roleManager.Create(new IdentityRole("Administrator"));
+            roleManager.Create(new IdentityRole("Support Agent"));
+            roleManager.Create(new IdentityRole("Customer"));
 
             context.SaveChanges();
         }
@@ -67,18 +75,23 @@ namespace SMS.Data.Migrations
                 throw new Exception(string.Join("; ", userCreateResult.Errors));
             }
 
-            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-            var roleCreateResult = roleManager.Create(new IdentityRole(adminRole));
-            if (!roleCreateResult.Succeeded)
-            {
-                throw new Exception(string.Join("; ", roleCreateResult.Errors));
-            }
-
             var addAdminRoleResult = userManager.AddToRole(adminUser.Id, adminRole);
             if (!addAdminRoleResult.Succeeded)
             {
                 throw new Exception(string.Join("; ", addAdminRoleResult.Errors));
             }
+
+            context.SaveChanges();
+        }
+
+        private void AddAvailabilities(SMSContext context)
+        {
+            context.Availabilities.Add(new Availability { AvailabilityName = "Primary Support" });
+            context.Availabilities.Add(new Availability { AvailabilityName = "Secondary Support" });
+            context.Availabilities.Add(new Availability { AvailabilityName = "Generally Available" });
+            context.Availabilities.Add(new Availability { AvailabilityName = "Unavailable" });
+
+            context.SaveChanges();
         }
     }
 }
