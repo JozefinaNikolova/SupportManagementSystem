@@ -1,6 +1,7 @@
 namespace SMS.Data
 {
     using Microsoft.AspNet.Identity.EntityFramework;
+    using SMS.Models;
     using System;
     using System.Data.Entity;
     using System.Linq;
@@ -13,6 +14,14 @@ namespace SMS.Data
             //Database.SetInitializer(new MigrateDatabaseToLatestVersion<SMSContext, Configuration>());
         }
 
-        // public virtual DbSet<MyEntity> MyEntities { get; set; }
+        public virtual DbSet<Availability> Availabilities { get; set; }
+        public virtual DbSet<CallSettings> CallSettings { get; set; }
+        public virtual DbSet<Report> Reports { get; set; }
+        public virtual DbSet<SupportAgentsAvailability> SupportAgentsAvailabilities { get; set; }
+
+        public static SMSContext Create()
+        {
+            return new SMSContext();
+        }
     }
 }
