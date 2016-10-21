@@ -2,9 +2,13 @@
 {
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.Owin;
+    using SMS.Data;
     using SMS.Models;
     using SMS.Web.Areas.Administrator.Models;
     using SMS.Web.Controllers;
+    using System;
+    using System.Collections.Generic;
+    using System.Data.SqlClient;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web;
@@ -108,5 +112,16 @@
                 ModelState.AddModelError("", error);
             }
         }
+        
+        
+        public ActionResult ShowUser()
+        {
+            SMSContext r = new SMSContext();
+            var data = r.Users.ToList();
+            ViewBag.userDetails = data;           
+            return View();
+            
+        }
+      
     }
 }

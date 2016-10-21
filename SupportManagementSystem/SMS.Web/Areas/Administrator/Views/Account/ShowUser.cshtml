@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Users' Profile";
+}
+
+<h2>User Profile</h2>
+
+<div>
+    <table id="t01">
+        <thead>
+        <th>Email</th>
+        <th>Phone</th>
+        </thead>
+        @foreach (var item in ViewBag.userDetails)
+        {
+            <tr>
+                <td>
+                    @item.Email &nbsp; &nbsp; &nbsp;
+                </td>              
+                <td>
+                    @item.PhoneNumber &nbsp; &nbsp; &nbsp;
+                </td> &nbsp; &nbsp; &nbsp;
+            </tr>
+        }
+    </table>
+</div>  
