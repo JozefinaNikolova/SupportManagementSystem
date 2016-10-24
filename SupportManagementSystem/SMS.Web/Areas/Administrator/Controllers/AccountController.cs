@@ -14,7 +14,7 @@
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Security;
-    
+
 
     public class AccountController : BaseController
     {
@@ -112,16 +112,19 @@
                 ModelState.AddModelError("", error);
             }
         }
-        
-        
+
         public ActionResult ShowUser()
         {
-            SMSContext r = new SMSContext();
-            var data = r.Users.ToList();
-            ViewBag.userDetails = data;           
+            SMSContext r = new SMSContext();          
+            var qry = from q in r.Users
+                      select new UserViewModel
+                      {
+                          Email = q.Email,
+                          PhoneNumber = q.PhoneNumber,                      
+                      };
+            var data = qry.ToList();
+            ViewBag.userDetails = data;
             return View();
-            
         }
-      
     }
 }
