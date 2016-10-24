@@ -11,14 +11,19 @@
     <table id="t01">
         <thead>
         <th>Email</th>
+        <th>Availability</th>
         <th>Phone</th>
+
         </thead>
         @foreach (var item in ViewBag.userDetails)
         {
             <tr>
                 <td>
                     @item.Email &nbsp; &nbsp; &nbsp;
-                </td>
+                </td> 
+                <td>
+                    @item.Availability &nbsp; &nbsp; &nbsp;
+                </td>             
                 <td>
                     @item.PhoneNumber &nbsp; &nbsp; &nbsp;
                 </td> &nbsp; &nbsp; &nbsp;

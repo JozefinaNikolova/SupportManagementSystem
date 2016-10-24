@@ -115,15 +115,17 @@
 
         public ActionResult ShowUser()
         {
-            SMSContext r = new SMSContext();          
+            SMSContext r = new SMSContext();                     
             var qry = from q in r.Users
+                      join s in r.Availabilities on q.AvailabilityId equals s.Id
                       select new UserViewModel
                       {
                           Email = q.Email,
-                          PhoneNumber = q.PhoneNumber,                      
+                          PhoneNumber = q.PhoneNumber,
+                          Availability=s.AvailabilityName  
                       };
             var data = qry.ToList();
-            ViewBag.userDetails = data;
+            ViewBag.userDetails = data;          
             return View();
         }
     }
