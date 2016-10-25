@@ -19,6 +19,11 @@ namespace SMS.Data.Migrations
 
         protected override void Seed(SMSContext context)
         {
+            if (!context.Availabilities.Any())
+            {
+                AddAvailabilities(context);
+            }
+
             if (!context.Users.Any())
             {
                 CreateUserRoles(context);
@@ -27,15 +32,13 @@ namespace SMS.Data.Migrations
                 var adminUsername = adminEmail;
                 var adminPhoneNumber = "07001700";
                 var adminPassword = "123456";
-                string adminRole = "Administrator";
+                var adminRole = "Administrator";
+                var adminAvailabilityId = context.Availabilities.Where(a => a.AvailabilityName == "Unavailable").FirstOrDefault().Id;
 
-                CreateAdminUser(context, adminEmail, adminUsername, adminPhoneNumber, adminPassword, adminRole);
+                CreateAdminUser(context, adminEmail, adminUsername, adminPhoneNumber, adminPassword, adminRole, adminAvailabilityId);
             }
 
-            if(!context.Availabilities.Any())
-            {
-                AddAvailabilities(context);
-            }
+            
         }
 
         private void CreateUserRoles(SMSContext context)
@@ -48,13 +51,14 @@ namespace SMS.Data.Migrations
             context.SaveChanges();
         }
 
-        private void CreateAdminUser(SMSContext context, string adminEmail, string adminUsername, string adminPhoneNumber, string adminPassword, string adminRole)
+        private void CreateAdminUser(SMSContext context, string adminEmail, string adminUsername, string adminPhoneNumber, string adminPassword, string adminRole, int adminAvailabilityId)
         {
             var adminUser = new SupportAgent
             {
                 UserName = adminUsername,
                 Email = adminEmail,
-                PhoneNumber = adminPhoneNumber
+                PhoneNumber = adminPhoneNumber,
+                AvailabilityId = adminAvailabilityId
             };
 
             var userStore = new UserStore<SupportAgent>(context);
