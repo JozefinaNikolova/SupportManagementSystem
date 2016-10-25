@@ -11,6 +11,19 @@ namespace SMS.Data.Migrations
 
     public sealed class Configuration : DbMigrationsConfiguration<SMSContext>
     {
+        private const string DefaultAdminEmail = "admin@admin.com";
+        private const string DefaultAdminPhoneNumber = "07001700";
+        private const string DefaultAdminPassword = "123456";
+
+        private const string AdministratorRoleName = "Administrator";
+        private const string SupportAgentRoleName = "Support Agent";
+        private const string CustomerRoleName = "Customer";
+
+        private const string PrimarySupportName = "Primary Support";
+        private const string SecondarySupportName = "Secondary Support";
+        private const string GenerallyAvailableName = "Generally Available";
+        private const string UnavailableName = "Unavailable";
+
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
@@ -28,12 +41,12 @@ namespace SMS.Data.Migrations
             {
                 CreateUserRoles(context);
 
-                var adminEmail = "admin@admin.com";
+                var adminEmail = DefaultAdminEmail;
                 var adminUsername = adminEmail;
-                var adminPhoneNumber = "07001700";
-                var adminPassword = "123456";
-                var adminRole = "Administrator";
-                var adminAvailabilityId = context.Availabilities.Where(a => a.AvailabilityName == "Unavailable").FirstOrDefault().Id;
+                var adminPhoneNumber = DefaultAdminPhoneNumber;
+                var adminPassword = DefaultAdminPassword;
+                var adminRole = AdministratorRoleName;
+                var adminAvailabilityId = context.Availabilities.Where(a => a.AvailabilityName == UnavailableName).FirstOrDefault().Id;
 
                 CreateAdminUser(context, adminEmail, adminUsername, adminPhoneNumber, adminPassword, adminRole, adminAvailabilityId);
             }
@@ -44,9 +57,9 @@ namespace SMS.Data.Migrations
         private void CreateUserRoles(SMSContext context)
         {
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-            roleManager.Create(new IdentityRole("Administrator"));
-            roleManager.Create(new IdentityRole("Support Agent"));
-            roleManager.Create(new IdentityRole("Customer"));
+            roleManager.Create(new IdentityRole(AdministratorRoleName));
+            roleManager.Create(new IdentityRole(SupportAgentRoleName));
+            roleManager.Create(new IdentityRole(CustomerRoleName));
 
             context.SaveChanges();
         }
@@ -90,10 +103,10 @@ namespace SMS.Data.Migrations
 
         private void AddAvailabilities(SMSContext context)
         {
-            context.Availabilities.Add(new Availability { AvailabilityName = "Primary Support" });
-            context.Availabilities.Add(new Availability { AvailabilityName = "Secondary Support" });
-            context.Availabilities.Add(new Availability { AvailabilityName = "Generally Available" });
-            context.Availabilities.Add(new Availability { AvailabilityName = "Unavailable" });
+            context.Availabilities.Add(new Availability { AvailabilityName = PrimarySupportName });
+            context.Availabilities.Add(new Availability { AvailabilityName = SecondarySupportName });
+            context.Availabilities.Add(new Availability { AvailabilityName = GenerallyAvailableName });
+            context.Availabilities.Add(new Availability { AvailabilityName = UnavailableName });
 
             context.SaveChanges();
         }
