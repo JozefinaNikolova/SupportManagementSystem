@@ -73,7 +73,7 @@
             {
                 var availabilityId = this.Data.Availabilities
                     .All()
-                    .Where(a => a.AvailabilityName == "Generally Available")
+                    .Where(a => a.AvailabilityName == "Unavailable")
                     .FirstOrDefault()
                     .Id;
 
