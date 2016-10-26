@@ -96,6 +96,18 @@
                     //// var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     //// await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
+                    var availability = new SupportAgentsAvailability
+                    {
+                        SupportAgentId = user.Id,
+                        AvailabilityId = user.AvailabilityId,
+                        StartTime = DateTime.Now
+                    };
+
+                    this.Data.SupportAgentsAvailabilities.Add(availability);
+                    user.SupportAgentAvailabilities.Add(availability);
+
+                    this.Data.SaveChanges();
+
                     return RedirectToAction("Index", "Home", new { area = "" });
                 }
                 AddErrors(result);

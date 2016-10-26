@@ -1,0 +1,42 @@
+﻿@model IEnumerable<SMS.Web.Areas.Administrator.Models.UserViewModel>
+
+<h2>Support Agents</h2>
+<hr/>
+
+<table class="table table-responsive table-hover">
+    <thead>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Current Availability</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Roles</th>
+    </thead>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink(user.Email, "ShowUser", "Account", new { area = "" , id = user.Id}, null)</td>
+                <td>@user.PhoneNumber</td>
+                <td>@user.Availability</td>
+                <td>@user.From</td>
+                @if (@user.To == null)
+                {
+                    <td>n/a</td>
+                }
+                else
+                {
+                    <td>@user.To</td>
+                }
+
+                <td>
+                    @foreach (var role in user.Roles)
+                    {
+                        <div>@role</div>
+                    }
+                </td>
+
+                <td>@Html.ActionLink("Edit", "Edit", "Admin", new { area = "Administrator" }, new { @class = "btn btn-success" })</td>
+            </tr>
+        }
+</table>
+
