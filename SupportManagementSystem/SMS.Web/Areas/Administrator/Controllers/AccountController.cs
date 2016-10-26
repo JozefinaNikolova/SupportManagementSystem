@@ -15,7 +15,7 @@
     using System.Web.Mvc;
     using System.Web.Security;
 
-
+    [Authorize(Roles = "Administrator")]
     public class AccountController : BaseController
     {
         private ApplicationSignInManager _signInManager;
@@ -56,7 +56,6 @@
         }
 
         // GET: Admnistrator/Account/Register
-        [AllowAnonymous]
         public ActionResult Register()
         {
             return View();
@@ -65,7 +64,6 @@
         //
         // POST: Admnistrator/Account/Register
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
