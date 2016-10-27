@@ -1,6 +1,7 @@
 ﻿namespace SMS.Web.Areas.Administrator.Controllers
 {
     using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
     using Microsoft.AspNet.Identity.Owin;
     using SMS.Data;
     using SMS.Models;
@@ -94,7 +95,11 @@
                     //// string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     //// var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     //// await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    var userStore = new UserStore<SupportAgent>(new SMSContext());
+                    var userManager = new UserManager<SupportAgent>(userStore);
 
+                    userManager.AddToRole(user.Id, "Support Agent");
+                    
                     var availability = new SupportAgentsAvailability
                     {
                         SupportAgentId = user.Id,
