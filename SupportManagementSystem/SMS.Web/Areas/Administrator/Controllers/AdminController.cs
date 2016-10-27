@@ -17,7 +17,8 @@
     [Authorize(Roles = "Administrator")]
     public class AdminController : BaseController
     {
-        public ActionResult Panel()
+        [Route("Administrator/Users")]
+        public ActionResult Users()
         {
             var users = this.Data.SupportAgents
                 .All()
