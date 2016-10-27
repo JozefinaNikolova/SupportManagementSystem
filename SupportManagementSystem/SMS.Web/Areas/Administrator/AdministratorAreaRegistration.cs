@@ -16,15 +16,15 @@
         public override void RegisterArea(AreaRegistrationContext context) 
         {
             context.MapRoute(
-                "Administrator_Edit",
-                "Administrator/Users/{action}/{id}",
+                "Administrator_Admin",
+                "Administrator/{action}/{id}",
                 new { controller = "Admin", action = "Index", id = UrlParameter.Optional },
                 new { isMethodInHomeController = new RootRouteConstraint<AdminController>() }
             );
 
             context.MapRoute(
-                "Administrator_Admin",
-                "Administrator/{action}/{id}",
+                "Administrator_Edit",
+                "Administrator/Users/{action}/{id}",
                 new { controller = "Admin", action = "Index", id = UrlParameter.Optional },
                 new { isMethodInHomeController = new RootRouteConstraint<AdminController>() }
             );
