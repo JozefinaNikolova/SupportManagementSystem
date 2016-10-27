@@ -35,7 +35,7 @@
                     }
                 </td>
 
-                <td>@Html.ActionLink("Edit", "Edit", "Admin", new { area = "Administrator" }, new { @class = "btn btn-success" })</td>
+                <td>@Html.ActionLink("Edit", "UserProfile", "Admin", new { area = "Administrator", id = user.Id }, new { @class = "btn btn-success" })</td>
                 <td>@Html.ActionLink("Delete", "Delete", "Admin", new { area = "Administrator", id = user.Id }, new { @class = "btn btn-success" })</td>
             </tr>
         }
