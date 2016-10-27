@@ -68,6 +68,50 @@
 
             return this.RedirectToAction("Users", "Admin", new { area = "Administrator" });
         }
+
+        [HttpGet]
+        public ActionResult EditAvailability(string id)
+        {
+            var user = this.Data.SupportAgents
+                .All()
+                .Where(u => u.Id == id)
+                .Select(UserViewModel.Create)
+                .FirstOrDefault();
+
+            return this.View(user);
+        }
+
+        [HttpPost]
+        public ActionResult EditAvailability(UserViewModel model)
+        {
+            var user = this.Data.SupportAgents
+                .All()
+                .Where(u => u.Id == model.Id)
+                .FirstOrDefault();
+
+            var availability = this.Data.Availabilities
+                .All()
+                .Where(a => a.AvailabilityName == model.Availability)
+                .FirstOrDefault();
+
+            user.Availability = availability;
+            user.AvailableFrom = model.From;
+            user.AvailableTo = model.To;
+
+            var supportAgentAvailability = new SupportAgentsAvailability
+            {
+                AvailabilityId = availability.Id,
+                SupportAgentId = model.Id,
+                StartTime = model.From,
+                EndTime = model.To
+            };
+
+            this.Data.SupportAgentsAvailabilities.Add(supportAgentAvailability);
+
+            this.Data.SaveChanges();
+
+            return this.RedirectToAction("Users", "Admin", new { area = "Administrator" });
+        }
        
     }
 }

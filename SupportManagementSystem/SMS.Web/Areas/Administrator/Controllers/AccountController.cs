@@ -80,7 +80,8 @@
                     UserName = model.Email,
                     Email = model.Email,
                     PhoneNumber = model.PhoneNumber,
-                    AvailabilityId = availabilityId
+                    AvailabilityId = availabilityId,
+                    AvailableFrom = DateTime.Now
                 };
 
                 var result = await UserManager.CreateAsync(user, model.Password);
@@ -98,7 +99,7 @@
                     {
                         SupportAgentId = user.Id,
                         AvailabilityId = user.AvailabilityId,
-                        StartTime = DateTime.Now
+                        StartTime = user.AvailableFrom
                     };
 
                     this.Data.SupportAgentsAvailabilities.Add(availability);
