@@ -17,7 +17,6 @@
     [Authorize(Roles = "Administrator")]
     public class AdminController : BaseController
     {
-        [Route("Administrator/Users")]
         public ActionResult Users()
         {
             var users = this.Data.SupportAgents
@@ -41,6 +40,33 @@
             }
 
             return View(users);
+        }
+
+        [HttpGet]
+        public ActionResult EditPhone(string id)
+        {
+            var user = this.Data.SupportAgents
+                .All()
+                .Where(u => u.Id == id)
+                .Select(UserViewModel.Create)
+                .FirstOrDefault();
+
+            return this.View(user);
+        }
+
+        [HttpPost]
+        public ActionResult EditPhone(UserViewModel model)
+        {
+            var user = this.Data.SupportAgents
+                .All()
+                .Where(u => u.Id == model.Id)
+                .FirstOrDefault();
+
+            user.PhoneNumber = model.PhoneNumber;
+
+            this.Data.SaveChanges();
+
+            return this.RedirectToAction("Users", "Admin", new { area = "Administrator" });
         }
        
     }
