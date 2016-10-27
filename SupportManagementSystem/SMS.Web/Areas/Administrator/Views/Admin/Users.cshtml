@@ -15,7 +15,7 @@
         @foreach (var user in Model)
         {
             <tr>
-                <td>@Html.ActionLink(user.Email, "ShowUser", "Account", new { area = "" , id = user.Id}, null)</td>
+                <td>@Html.ActionLink(user.Email, "UserProfile", "Admin", new { area = "Administrator" , id = user.Id}, null)</td>
                 <td>@user.PhoneNumber</td>
                 <td>@user.Availability</td>
                 <td>@user.From</td>

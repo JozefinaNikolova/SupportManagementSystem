@@ -72,7 +72,7 @@
         [HttpGet]
         public ActionResult EditAvailability(string id)
         {
-            var user = this.Data.SupportAgents
+             var user = this.Data.SupportAgents
                 .All()
                 .Where(u => u.Id == id)
                 .Select(EditUserViewModel.Create)
@@ -113,7 +113,61 @@
             this.Data.SaveChanges();
 
             return this.RedirectToAction("Users", "Admin", new { area = "Administrator" });
+        
         }
-       
+
+        [HttpGet]
+        public ActionResult EditEmail(string id)
+        {
+            var user = this.Data.SupportAgents
+                .All()
+                .Where(u => u.Id == id)
+                .Select(EditUserViewModel.Create)
+                .FirstOrDefault();
+
+            return this.View(user);
+        }
+
+        [HttpPost]
+        public ActionResult EditEmail(EditUserViewModel model)
+        {
+            var user = this.Data.SupportAgents
+                .All()
+                .Where(u => u.Id == model.Id)
+                .FirstOrDefault();
+
+            user.Email = model.Email;
+
+            this.Data.SaveChanges();
+
+            return this.RedirectToAction("Users", "Admin", new { area = "Administrator" });
+        }
+
+
+        public ActionResult UserProfile(string id)
+        {
+            string userId = id;
+            var users = this.Data.SupportAgents
+               .All()
+               .Where(a => a.Id == userId)
+               .Select(UserViewModel.Create).ToList();
+
+            foreach (var user in users)
+            {
+                var supportAgent = this.Data.SupportAgents.All().Where(a => a.Id == user.Id).FirstOrDefault();
+                var roles = supportAgent.Roles;
+
+                var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new SMSContext()));
+
+
+                foreach (var role in roles)
+                {
+                    var currentRole = roleManager.FindById(role.RoleId);
+                    user.Roles.Add(currentRole.Name);
+                }
+
+            }
+            return View(users);
+        }
     }
 }
