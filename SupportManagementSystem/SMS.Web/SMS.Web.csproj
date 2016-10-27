@@ -188,6 +188,7 @@
     <Compile Include="Areas\Administrator\AdministratorAreaRegistration.cs" />
     <Compile Include="Areas\Administrator\Controllers\AccountController.cs" />
     <Compile Include="Areas\Administrator\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Administrator\Models\EditUserViewModel.cs" />
     <Compile Include="Areas\Administrator\Models\RegisterViewModel.cs" />
     <Compile Include="Areas\Administrator\Models\UserViewModel.cs" />
     <Compile Include="Areas\Administrator\RootRouteConstraint.cs" />

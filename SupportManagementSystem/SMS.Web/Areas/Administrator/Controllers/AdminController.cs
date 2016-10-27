@@ -48,14 +48,14 @@
             var user = this.Data.SupportAgents
                 .All()
                 .Where(u => u.Id == id)
-                .Select(UserViewModel.Create)
+                .Select(EditUserViewModel.Create)
                 .FirstOrDefault();
 
             return this.View(user);
         }
 
         [HttpPost]
-        public ActionResult EditPhone(UserViewModel model)
+        public ActionResult EditPhone(EditUserViewModel model)
         {
             var user = this.Data.SupportAgents
                 .All()
@@ -75,14 +75,16 @@
             var user = this.Data.SupportAgents
                 .All()
                 .Where(u => u.Id == id)
-                .Select(UserViewModel.Create)
+                .Select(EditUserViewModel.Create)
                 .FirstOrDefault();
+
+            user.PossibleAvailabilities = this.Data.Availabilities.All().Select(a => a.AvailabilityName);
 
             return this.View(user);
         }
 
         [HttpPost]
-        public ActionResult EditAvailability(UserViewModel model)
+        public ActionResult EditAvailability(EditUserViewModel model)
         {
             var user = this.Data.SupportAgents
                 .All()
