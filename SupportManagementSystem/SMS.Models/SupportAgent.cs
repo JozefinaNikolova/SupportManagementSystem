@@ -2,6 +2,7 @@
 {
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Security.Claims;
@@ -17,6 +18,10 @@
         }
 
         public int AvailabilityId { get; set; }
+
+        public DateTime AvailableFrom { get; set; }
+
+        public DateTime AvailableTo { get; set; }
 
         public virtual Availability Availability { get; set; }
 

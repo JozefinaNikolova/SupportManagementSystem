@@ -38,8 +38,8 @@
                     Email = u.Email,
                     PhoneNumber = u.PhoneNumber,
                     Availability = u.Availability.AvailabilityName,
-                    From = u.SupportAgentAvailabilities.Where(a => a.AvailabilityId == u.Availability.Id).OrderByDescending(x => x.StartTime).FirstOrDefault().StartTime,
-                    To = u.SupportAgentAvailabilities.Where(a => a.AvailabilityId == u.Availability.Id).OrderByDescending(x => x.StartTime).FirstOrDefault().EndTime
+                    From = u.AvailableFrom,
+                    To = u.AvailableTo
                 };
             }
         }
