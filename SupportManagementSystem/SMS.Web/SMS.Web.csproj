@@ -225,6 +225,7 @@
     <Content Include="Areas\Administrator\Views\Admin\EditAvailability.cshtml" />
     <Content Include="Areas\Administrator\Views\Admin\EditEmail.cshtml" />
     <Content Include="Areas\Administrator\Views\Admin\UserProfile.cshtml" />
+    <None Include="Areas\Administrator\Views\Admin\Delete.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

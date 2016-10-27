@@ -169,5 +169,27 @@
             }
             return View(users);
         }
+
+        [HttpGet]
+        public ActionResult Delete(string id)
+        {
+            var user = this.Data.SupportAgents
+                .All()
+                .Where(u => u.Id == id)
+                .Select(EditUserViewModel.Create)
+                .FirstOrDefault();
+
+            return this.View(user);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(EditUserViewModel model)
+        {
+            this.Data.SupportAgents.Delete(model.Id);
+
+            this.Data.SaveChanges();
+
+            return this.RedirectToAction("Users", "Admin", new { area = "Administrator" });
+        }
     }
 }
