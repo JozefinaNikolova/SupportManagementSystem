@@ -5,20 +5,24 @@
 
 <h2>User Profile</h2>
 
-<table>
+<table class ="table-responsive">
     @foreach (var item in Model)
     {
         <tr>
             <th>Email</th>
             <td>@item.Email</td>
+            <td>
+            <td>@Html.ActionLink("Edit", "EditEmail", "Admin", new { area = "Administrator", id = item.Id }, new { @class = "btn btn-success" })</td>
         </tr>
         <tr>
             <th>Availability</th>
             <td>@item.Availability</td>
+            <td>@Html.ActionLink("Edit", "EditAvailability", "Admin", new { area = "Administrator", id = item.Id }, new { @class = "btn btn-success" })</td>
         </tr>
         <tr>
             <th>PhoneNumber &nbsp; &nbsp; &nbsp;</th>
             <td>@item.PhoneNumber</td>
+            <td>@Html.ActionLink("Edit", "EditPhone", "Admin", new { area = "Administrator", id = item.Id }, new { @class = "btn btn-success" })</td>
         </tr>
         <tr>
             <th>Role</th>
