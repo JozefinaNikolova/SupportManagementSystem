@@ -1,0 +1,40 @@
+﻿@model SMS.Web.Areas.Administrator.Models.ReportViewModel
+
+<h2>Report from @Model.StartTime to @Model.EndTime</h2>
+
+
+
+<table class="table table-responsive table-hover">
+    <tr>
+        <th>
+            Support Agent
+        </th>
+        <th>
+            Availability
+        </th>
+        <th>
+            From
+        </th>
+        <th>
+            To
+        </th>
+    </tr>
+
+    @foreach (var user in Model.SupportAgentsAvailabilities)
+    {
+        <tr>
+            <td>
+            @Html.ActionLink(user.Email, "UserProfile", "Admin", new { area = "Administrator", id = user.SupportAgentId }, null)
+            </td>
+            <td>
+                @user.Availability
+            </td>
+            <td>
+                @user.From
+            </td>
+            <td>
+                @user.To
+            </td>
+        </tr>
+    }
+</table>

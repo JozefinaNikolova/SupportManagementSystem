@@ -45,9 +45,21 @@
             var reports = this.Data.Reports
                 .All()
                 .OrderByDescending(r => r.Id)
-                .Select(ReportViewModel.Create).ToList();
+                .Select(ReportViewModel.Create);
 
             return this.View(reports);
+        }
+
+        [HttpGet]
+        public ActionResult Details(int id)
+        {
+            var report = this.Data.Reports
+                .All()
+                .Where(r => r.Id == id)
+                .Select(ReportViewModel.Create)
+                .FirstOrDefault();
+
+            return this.View(report);
         }
     }
 }

@@ -29,8 +29,11 @@
                             .AsEnumerable()
                             .Select(s => new SupportAgentsAvailabilityViewModel
                             {
+                                SupportAgentId = s.SupportAgentId,
                                 Email = s.SupportAgent.Email,
-                                Availability = s.Availability.AvailabilityName
+                                Availability = s.Availability.AvailabilityName,
+                                From = s.StartTime,
+                                To = s.EndTime
                             })
                 };
             }

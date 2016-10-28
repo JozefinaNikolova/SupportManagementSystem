@@ -192,6 +192,8 @@
     <Compile Include="Areas\Administrator\Models\CreateReportViewModel.cs" />
     <Compile Include="Areas\Administrator\Models\EditUserViewModel.cs" />
     <Compile Include="Areas\Administrator\Models\RegisterViewModel.cs" />
+    <Compile Include="Areas\Administrator\Models\ReportViewModel.cs" />
+    <Compile Include="Areas\Administrator\Models\SupportAgentsAvailabilityViewModel.cs" />
     <Compile Include="Areas\Administrator\Models\UserViewModel.cs" />
     <Compile Include="Areas\Administrator\RootRouteConstraint.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -237,6 +239,7 @@
     <None Include="Areas\Administrator\Views\Admin\Delete.cshtml" />
     <Content Include="Areas\Administrator\Views\Report\Create.cshtml" />
     <Content Include="Areas\Administrator\Views\Report\All.cshtml" />
+    <Content Include="Areas\Administrator\Views\Report\Details.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
