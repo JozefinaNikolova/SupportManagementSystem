@@ -1,0 +1,38 @@
+﻿@model IEnumerable<SMS.Web.Models.UserViewModel>
+@{
+    ViewBag.Title = "UserProfile";
+}
+
+<h2>User Profile</h2>
+
+<table>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>Email</th>
+            <td>@item.Email</td>
+            <td>
+            <td>@Html.ActionLink("Edit", "EditEmail", "User", new { area = "", id = item.Id }, new { @class = "btn btn-success" })</td>
+        </tr>
+        <tr>
+            <th>Availability</th>
+            <td>@item.Availability</td>
+            <td>@Html.ActionLink("Edit", "EditAvailability", "User", new { area = "", id = item.Id }, new { @class = "btn btn-success" })</td>
+        </tr>
+        <tr>
+            <th>PhoneNumber </th>
+            <td>@item.PhoneNumber</td>
+            <td>@Html.ActionLink("Edit", "EditPhone", "User", new { area = "", id = item.Id }, new { @class = "btn btn-success" })</td>
+        </tr>
+        <tr>
+            <th>Role</th>
+            <td>
+                @foreach (var role in item.Roles)
+                {
+                    <div>@role</div>
+                }
+            </td>
+
+        </tr>
+    }
+</table>
