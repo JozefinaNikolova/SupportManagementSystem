@@ -24,5 +24,22 @@ namespace SMS.Data
         {
             return new SMSContext();
         }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+
+            modelBuilder.Entity<Report>()
+                        .HasMany<SupportAgentsAvailability>(r => r.SupportAgentsAvailabilities)
+                        .WithMany(s => s.Reports)
+                        .Map(rs =>
+                        {
+                            rs.MapLeftKey("ReportId");
+                            rs.MapRightKey("SupportAgentsAvailabilityId");
+                            rs.ToTable("ReportsSupportAgentsAvailabilities");
+                        });
+
+            base.OnModelCreating(modelBuilder);
+        }
+
     }
 }

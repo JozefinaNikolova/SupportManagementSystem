@@ -4,11 +4,11 @@
     using System.Collections.Generic;
     public class Report
     {
-        private IEnumerable<SupportAgentsAvailability> supportAgentsAvailabilities;
+        private ICollection<SupportAgentsAvailability> supportAgentsAvailabilities;
 
         public Report()
         {
-            this.supportAgentsAvailabilities = new HashSet<SupportAgentsAvailability>();
+            this.supportAgentsAvailabilities = new List<SupportAgentsAvailability>();
         }
 
         public int Id { get; set; }
@@ -17,7 +17,7 @@
 
         public DateTime EndTime { get; set; }
 
-        public virtual IEnumerable<SupportAgentsAvailability> SupportAgentsAvailabilities
+        public virtual ICollection<SupportAgentsAvailability> SupportAgentsAvailabilities
         {
             get { return this.supportAgentsAvailabilities; }
             set { this.supportAgentsAvailabilities = value; }
