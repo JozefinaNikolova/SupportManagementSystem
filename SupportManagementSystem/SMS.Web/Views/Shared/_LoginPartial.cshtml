@@ -6,9 +6,18 @@
     @Html.AntiForgeryToken()
 
     <ul class="nav navbar-nav navbar-right">
-        <li>
-            <td>@Html.ActionLink(User.Identity.GetUserName(), "UserProfile", "Admin", new { area = "Administrator", id = User.Identity.GetUserId() }, null)</td>
-        </li>
+
+    <li>
+         @if (Request.IsAuthenticated && User.IsInRole("Administrator"))
+        {
+                  @Html.ActionLink(User.Identity.GetUserName(), "UserProfile", "Admin", new { area = "Administrator", id = User.Identity.GetUserId() }, null)
+        }
+         else
+         {
+            @Html.ActionLink(User.Identity.GetUserName(), "UserProfile", "User", new { area = "", id = User.Identity.GetUserId() }, null)
+
+         }
+             </li>    
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
     </ul>
     }

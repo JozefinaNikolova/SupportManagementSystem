@@ -18,7 +18,7 @@
         }
 
         [HttpPost]
-        public ActionResult Create(ReportViewModel model)
+        public ActionResult Create(CreateReportViewModel model)
         {
             var supportAgentAvailabilities = this.Data.SupportAgentsAvailabilities
                 .All()
