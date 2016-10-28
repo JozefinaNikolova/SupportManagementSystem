@@ -17,10 +17,6 @@
    [Authorize(Roles = "Administrator")]
     public class AdminController : BaseController
     {
-<<<<<<< HEAD
-        
-=======
->>>>>>> b614d423f9dfc3da69caed99a73c5ec61a4d3424
         public ActionResult Users()
         {
             var users = this.Data.SupportAgents
