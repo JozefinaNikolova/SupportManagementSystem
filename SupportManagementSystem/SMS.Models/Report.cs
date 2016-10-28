@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     public class Report
     {
-        private ICollection<SupportAgentsAvailability> supportAgentsAvailabilities;
+        private IEnumerable<SupportAgentsAvailability> supportAgentsAvailabilities;
 
         public Report()
         {
@@ -17,7 +17,7 @@
 
         public DateTime EndTime { get; set; }
 
-        public virtual ICollection<SupportAgentsAvailability> SupportAgentsAvailabilities
+        public virtual IEnumerable<SupportAgentsAvailability> SupportAgentsAvailabilities
         {
             get { return this.supportAgentsAvailabilities; }
             set { this.supportAgentsAvailabilities = value; }

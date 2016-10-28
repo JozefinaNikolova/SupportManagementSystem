@@ -143,6 +143,27 @@
             return this.RedirectToAction("Users", "Admin", new { area = "Administrator" });
         }
 
+        [HttpGet]
+        public ActionResult Delete(string id)
+        {
+            var user = this.Data.SupportAgents
+                .All()
+                .Where(u => u.Id == id)
+                .Select(EditUserViewModel.Create)
+                .FirstOrDefault();
+
+            return this.View(user);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(EditUserViewModel model)
+        {
+            this.Data.SupportAgents.Delete(model.Id);
+
+            this.Data.SaveChanges();
+
+            return this.RedirectToAction("Users", "Admin", new { area = "Administrator" });
+        }
 
         public ActionResult UserProfile(string id)
         {
@@ -171,25 +192,30 @@
         }
 
         [HttpGet]
-        public ActionResult Delete(string id)
+        public ActionResult CreateReport()
         {
-            var user = this.Data.SupportAgents
-                .All()
-                .Where(u => u.Id == id)
-                .Select(EditUserViewModel.Create)
-                .FirstOrDefault();
-
-            return this.View(user);
+            return this.View();
         }
 
         [HttpPost]
-        public ActionResult Delete(EditUserViewModel model)
+        public ActionResult CreateReport(ReportViewModel model)
         {
-            this.Data.SupportAgents.Delete(model.Id);
+            var supportAgentAvailabilities = this.Data.SupportAgentsAvailabilities
+                .All()
+                .Where(x => x.StartTime >= model.StartTime && x.EndTime <= model.EndTime);
 
+
+            var report = new Report
+            {
+                StartTime = model.StartTime,
+                EndTime = model.StartTime,
+                SupportAgentsAvailabilities = supportAgentAvailabilities
+            };
+
+            this.Data.Reports.Add(report);
             this.Data.SaveChanges();
 
-            return this.RedirectToAction("Users", "Admin", new { area = "Administrator" });
+            return this.View();
         }
     }
 }

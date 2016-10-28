@@ -31,7 +31,10 @@
                         </li>
                         <li>
                             @Html.ActionLink("Register Support Agent", "Register", "Account", new { area = "Administrator" }, htmlAttributes: new { id = "registerLink" })
-                        </li>                     
+                        </li>
+                        <li>
+                            @Html.ActionLink("Report", "CreateReport", "Admin", new { area = "Administrator" }, null)
+                        </li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")
