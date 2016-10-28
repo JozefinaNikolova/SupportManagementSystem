@@ -14,10 +14,9 @@
     using Microsoft.AspNet.Identity;
     using SMS.Models;
 
-   
+   [Authorize(Roles = "Administrator")]
     public class AdminController : BaseController
     {
-        [Authorize(Roles = "Administrator")]
         public ActionResult Users()
         {
             var users = this.Data.SupportAgents
