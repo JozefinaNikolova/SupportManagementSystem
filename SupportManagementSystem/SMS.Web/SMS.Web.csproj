@@ -235,6 +235,7 @@
     <Content Include="Areas\Administrator\Views\Admin\UserProfile.cshtml" />
     <None Include="Areas\Administrator\Views\Admin\Delete.cshtml" />
     <Content Include="Areas\Administrator\Views\Report\Create.cshtml" />
+    <Content Include="Areas\Administrator\Views\Report\All.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

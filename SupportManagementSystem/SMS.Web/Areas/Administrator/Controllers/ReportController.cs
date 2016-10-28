@@ -22,20 +22,32 @@
         {
             var supportAgentAvailabilities = this.Data.SupportAgentsAvailabilities
                 .All()
-                .Where(x => x.StartTime >= model.StartTime && x.EndTime <= model.EndTime);
+                .Where(x => x.StartTime >= model.StartTime && x.EndTime <= model.EndTime)
+                .ToList();
 
 
             var report = new Report
             {
                 StartTime = model.StartTime,
-                EndTime = model.StartTime,
+                EndTime = model.EndTime,
                 SupportAgentsAvailabilities = supportAgentAvailabilities
             };
 
             this.Data.Reports.Add(report);
             this.Data.SaveChanges();
 
-            return this.View();
+            return this.RedirectToAction("All");
+        }
+
+        [HttpGet]
+        public ActionResult All()
+        {
+            var reports = this.Data.Reports
+                .All()
+                .OrderByDescending(r => r.Id)
+                .Select(ReportViewModel.Create).ToList();
+
+            return this.View(reports);
         }
     }
 }
