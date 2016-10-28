@@ -188,6 +188,7 @@
     <Compile Include="Areas\Administrator\AdministratorAreaRegistration.cs" />
     <Compile Include="Areas\Administrator\Controllers\AccountController.cs" />
     <Compile Include="Areas\Administrator\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Administrator\Controllers\ReportController.cs" />
     <Compile Include="Areas\Administrator\Models\CreateReportViewModel.cs" />
     <Compile Include="Areas\Administrator\Models\ReportViewModel.cs" />
     <Compile Include="Areas\Administrator\Models\EditUserViewModel.cs" />
@@ -233,7 +234,7 @@
     <Content Include="Areas\Administrator\Views\Admin\EditEmail.cshtml" />
     <Content Include="Areas\Administrator\Views\Admin\UserProfile.cshtml" />
     <None Include="Areas\Administrator\Views\Admin\Delete.cshtml" />
-    <Content Include="Areas\Administrator\Views\Admin\CreateReport.cshtml" />
+    <Content Include="Areas\Administrator\Views\Report\Create.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

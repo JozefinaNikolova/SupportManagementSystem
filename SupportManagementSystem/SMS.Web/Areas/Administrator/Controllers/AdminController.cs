@@ -190,32 +190,5 @@
             }
             return View(users);
         }
-
-        [HttpGet]
-        public ActionResult CreateReport()
-        {
-            return this.View();
-        }
-
-        [HttpPost]
-        public ActionResult CreateReport(ReportViewModel model)
-        {
-            var supportAgentAvailabilities = this.Data.SupportAgentsAvailabilities
-                .All()
-                .Where(x => x.StartTime >= model.StartTime && x.EndTime <= model.EndTime);
-
-
-            var report = new Report
-            {
-                StartTime = model.StartTime,
-                EndTime = model.StartTime,
-                SupportAgentsAvailabilities = supportAgentAvailabilities
-            };
-
-            this.Data.Reports.Add(report);
-            this.Data.SaveChanges();
-
-            return this.View();
-        }
     }
 }
