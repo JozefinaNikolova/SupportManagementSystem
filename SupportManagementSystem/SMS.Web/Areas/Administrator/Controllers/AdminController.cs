@@ -20,14 +20,20 @@
     [Authorize(Roles = "Administrator")]
     public class AdminController : BaseController
     {
-        public ActionResult Users(int? page)
+        public ActionResult Users(string searchString, int? page)
         {
             int pageSize = 5;
             int pageNumber = (page ?? 1);
 
             var users = this.Data.SupportAgents
                 .All()
-                .Select(UserViewModel.Create).ToList();
+                .OrderBy(s => s.Id)
+                .Select(UserViewModel.Create);
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                users = users.Where(u => u.Email.Contains(searchString));
+            }
 
             foreach (var user in users)
             {
@@ -42,7 +48,6 @@
                     var currentRole = roleManager.FindById(role.RoleId);
                     user.Roles.Add(currentRole.Name);
 	            }
-                
             }
 
             return View(users.ToPagedList(pageNumber, pageSize));
