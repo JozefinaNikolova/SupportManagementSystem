@@ -1,6 +1,6 @@
 # Support Management System #
 
-For the purpose of providing 24/7 phone support of Atlassian products of external customers, a support management system will be created to manage the support agents availability.
+For the purpose of providing 24/7 phone support of products for external customers, a support management system will be created to manage the support agents availability.
 
 ## The managements of the support agents will fulfill the following requirements: ##
 
