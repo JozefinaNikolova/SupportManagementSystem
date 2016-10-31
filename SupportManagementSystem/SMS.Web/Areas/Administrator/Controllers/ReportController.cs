@@ -18,48 +18,20 @@
         }
 
         [HttpPost]
-        public ActionResult Create(CreateReportViewModel model)
+        public ActionResult Create(ReportViewModel model)
         {
-            var supportAgentAvailabilities = this.Data.SupportAgentsAvailabilities
+            return this.RedirectToAction("Details", model);
+        }
+
+        [HttpGet]
+        public ActionResult Details(ReportViewModel model)
+        {
+            model.SupportAgentsAvailabilities = this.Data.SupportAgentsAvailabilities
                 .All()
                 .Where(x => x.StartTime >= model.StartTime && x.EndTime <= model.EndTime)
-                .ToList();
+                .Select(SupportAgentsAvailabilityViewModel.Create);
 
-
-            var report = new Report
-            {
-                StartTime = model.StartTime,
-                EndTime = model.EndTime,
-                SupportAgentsAvailabilities = supportAgentAvailabilities
-            };
-
-            this.Data.Reports.Add(report);
-            this.Data.SaveChanges();
-
-            return this.RedirectToAction("All");
-        }
-
-        [HttpGet]
-        public ActionResult All()
-        {
-            var reports = this.Data.Reports
-                .All()
-                .OrderByDescending(r => r.Id)
-                .Select(ReportViewModel.Create);
-
-            return this.View(reports);
-        }
-
-        [HttpGet]
-        public ActionResult Details(int id)
-        {
-            var report = this.Data.Reports
-                .All()
-                .Where(r => r.Id == id)
-                .Select(ReportViewModel.Create)
-                .FirstOrDefault();
-
-            return this.View(report);
+            return this.View(model);
         }
     }
 }

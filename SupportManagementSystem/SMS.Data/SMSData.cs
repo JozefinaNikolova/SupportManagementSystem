@@ -26,11 +26,6 @@
             get { return this.GetRepository<CallSettings>(); }
         }
 
-        public IRepository<Report> Reports
-        {
-            get { return this.GetRepository<Report>(); }
-        }
-
         public IRepository<SupportAgent> SupportAgents
         {
             get { return this.GetRepository<SupportAgent>(); }

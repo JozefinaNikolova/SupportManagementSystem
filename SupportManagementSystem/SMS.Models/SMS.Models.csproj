@@ -83,7 +83,6 @@
     <Compile Include="Availability.cs" />
     <Compile Include="CallSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Report.cs" />
     <Compile Include="SupportAgent.cs" />
     <Compile Include="SupportAgentsAvailability.cs" />
   </ItemGroup>

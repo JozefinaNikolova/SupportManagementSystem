@@ -8,24 +8,21 @@
 
     public class ReportViewModel
     {
-        public int Id { get; set; }
+        public DateTime? StartTime { get; set; }
 
-        public DateTime StartTime { get; set; }
-
-        public DateTime EndTime { get; set; }
+        public DateTime? EndTime { get; set; }
 
         public IEnumerable<SupportAgentsAvailabilityViewModel> SupportAgentsAvailabilities { get; set; }
 
-        public static Expression<Func<Report, ReportViewModel>> Create
+        public static Expression<Func<SupportAgent, ReportViewModel>> Create
         {
             get
             {
                 return r => new ReportViewModel
                 {
-                    Id = r.Id,
-                    StartTime = r.StartTime,
-                    EndTime = r.EndTime,
-                    SupportAgentsAvailabilities = r.SupportAgentsAvailabilities
+                    StartTime = r.AvailableFrom,
+                    EndTime = r.AvailableTo,
+                    SupportAgentsAvailabilities = r.SupportAgentAvailabilities
                             .AsEnumerable()
                             .Select(s => new SupportAgentsAvailabilityViewModel
                             {

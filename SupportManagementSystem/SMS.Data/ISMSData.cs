@@ -9,8 +9,6 @@
 
         IRepository<CallSettings> CallSettings { get; }
 
-        IRepository<Report> Reports { get; }
-
         IRepository<SupportAgent> SupportAgents { get; }
 
         IRepository<SupportAgentsAvailability> SupportAgentsAvailabilities { get; }
