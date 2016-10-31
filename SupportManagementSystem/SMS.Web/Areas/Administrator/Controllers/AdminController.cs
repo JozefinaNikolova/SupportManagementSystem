@@ -1,24 +1,30 @@
 ﻿namespace SMS.Web.Areas.Administrator.Controllers
 {
-
+    using SMS.Data;
+    using SMS.Models;
+    using SMS.Web.Areas.Administrator.Models;
     using SMS.Web.Controllers;
+    using System.Web.Security;
+    using System.Web.Mvc;
+
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Web;
-    using System.Web.Mvc;
-    using SMS.Data;
-    using SMS.Web.Areas.Administrator.Models;
-    using System.Web.Security;
+    
     using Microsoft.AspNet.Identity.EntityFramework;
     using Microsoft.AspNet.Identity;
-    using SMS.Models;
+    using PagedList;
+    
 
     [Authorize(Roles = "Administrator")]
     public class AdminController : BaseController
     {
-        public ActionResult Users()
+        public ActionResult Users(int? page)
         {
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+
             var users = this.Data.SupportAgents
                 .All()
                 .Select(UserViewModel.Create).ToList();
@@ -39,7 +45,7 @@
                 
             }
 
-            return View(users);
+            return View(users.ToPagedList(pageNumber, pageSize));
         }
 
         [HttpGet]

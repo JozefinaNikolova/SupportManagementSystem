@@ -1,4 +1,5 @@
-﻿@model IEnumerable<SMS.Web.Areas.Administrator.Models.UserViewModel>
+﻿@model PagedList.IPagedList<SMS.Web.Areas.Administrator.Models.UserViewModel>
+@using PagedList.Mvc;
 
 <h2>Support Agents</h2>
 <hr/>
@@ -41,3 +42,11 @@
         }
 </table>
 
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Users",
+    new { page}))
+
+@section Scripts {
+    @Scripts.Render("~/Content/PagedList.css")
+}
